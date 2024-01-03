@@ -6,10 +6,9 @@ interface ViewProps {
   id: string;
   toggleSlider: () => void;
   isOpen: boolean;
-  children: React.ReactNode;
 }
 
-function UpdateModal({ id, toggleSlider, isOpen, children }: ViewProps) {
+function UpdateModal({ id, toggleSlider, isOpen }: ViewProps) {
   if (isOpen)
     return (
       <>
@@ -29,7 +28,7 @@ function UpdateModal({ id, toggleSlider, isOpen, children }: ViewProps) {
             >
               <XMarkIcon className="h-6 w-6" />
             </button>
-            <div className="flex flex-col items-center">{children}</div>
+            <div className="flex flex-col items-center">this is the slider</div>
           </div>
         </div>
       </>

@@ -5,13 +5,17 @@ import {
   TrashIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
+import ViewModal from "./ViewModal";
+import UpdateModal from "./UpdateModal";
 
 interface Props {
   program: ProgramTypes;
 }
 
 function ProgramCard({ program }: Props) {
+  const [isViewOpen, setIsViewOpen] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   return (
     <div className="bg-white p-3 rounded-2xl shadow flex flex-col">
       <div className=" flex items-center justify-between">
@@ -19,7 +23,10 @@ function ProgramCard({ program }: Props) {
           <AcademicCapIcon className="h-6 w-6" />
         </p>
         <div className="flex items-center gap-5">
-          <button className="bg-gray-100 text-gray-500 transition-colors duration-500 hover:text-purple-500 hover:bg-purple-100 px-2 py-1 rounded-lg">
+          <button
+            className="bg-gray-100 text-gray-500 transition-colors duration-500 hover:text-purple-500 hover:bg-purple-100 px-2 py-1 rounded-lg"
+            onClick={() => setIsViewOpen(true)}
+          >
             <EyeIcon className="h-6 w-6" />
           </button>
           <button className="bg-gray-100 text-gray-500 transition-colors duration-500 hover:text-purple-500 hover:bg-purple-100 px-2 py-1 rounded-lg">
@@ -102,6 +109,16 @@ function ProgramCard({ program }: Props) {
           </div>
         </div>
       </div>
+      <ViewModal
+        isOpen={isViewOpen}
+        toggleSlider={() => setIsViewOpen(false)}
+        id={program._id}
+      />
+      <UpdateModal
+        isOpen={isUpdateOpen}
+        toggleSlider={() => setIsUpdateOpen(false)}
+        id={program._id}
+      />
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import LoadingProgramSkeleton from "./LoadingProgramSkeleton";
 import ProgramCard from "./ProgramCard";
+import Modal from "@/components/ResponseModal";
 
 function ProgramsList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +34,7 @@ function ProgramsList() {
         })
         .then((data: any) => {
           isErrorNames
-            ? setIsErrorProgram(data.message)
+            ? setErrorMessage(data.message)
             : setProgramsNames(data.data);
         })
         .catch((error: any) => {
@@ -45,6 +46,11 @@ function ProgramsList() {
         });
     })();
   }, [isErrorNames]);
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setIsSuccess(false);
+    setErrorMessage("");
+  };
   return (
     <div className="h-full overflow-hidden">
       <p className="text-2xl font-bold text-gray-600 pl-10 pt-10">Programs</p>
@@ -73,6 +79,14 @@ function ProgramsList() {
           </div>
         )}
       </div>
+      <Modal
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        errorMessage={errorMessage}
+        successMessage={successMessage}
+        isModalOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </div>
   );
 }

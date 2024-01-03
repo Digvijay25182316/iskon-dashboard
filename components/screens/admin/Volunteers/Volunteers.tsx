@@ -90,6 +90,7 @@ function VolunteersList() {
         )}
       </div>
       <Modal
+        isLoading={isLoading}
         isSuccess={isSuccess}
         errorMessage={errorMessage}
         successMessage={successMessage}
